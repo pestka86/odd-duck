@@ -13,7 +13,7 @@ main {
   margin: 1rem auto;
   display: grid;
   grid-template-columns: 25% auto auto auto;
-  grid-template-rows: 7rem 10rem 10rem 30%;
+  grid-template-rows: 5rem 5rem 10rem 30%;
 }
 
 h1 {
@@ -46,7 +46,7 @@ section img {
 }
 
 section img:hover {
-  border: 5px solid rosybrown;
+  border: 5px solid white;
   cursor: pointer;
 }
 
