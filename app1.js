@@ -63,20 +63,65 @@ function handleProductsClick(event) {
   }
   if (clicks === maxClicksAllowed) {
     productsContainer.removeEventListener("click", handleProductsClick);
-    resultButton.addEventListener("click", renderResults);
+    resultButton.addEventListener("click", renderChart);
     productsContainer.className = "no-voting";
   } else {
     renderProducts();
   }
 }
 
-function renderResults() {
-  let ul = document.querySelector("ul");
+//function renderResults() {
+// let ul = document.querySelector("ul");
+//for (let i = 0; i < state.allProductsArray.length; i++) {
+//let li = document.createElement("li");
+//li.textContent = `${state.allProductsArray[i].name} had ${state.allProductsArray[i].views} views and was clicked ${state.allProductsArray[i].clicks} times.`;
+// ul.appendChild(li);
+// }
+//}
+
+function renderChart() {
+  const labelArray = [];
+  const clicksArray = [];
+  const viewsArray = [];
+
   for (let i = 0; i < state.allProductsArray.length; i++) {
-    let li = document.createElement("li");
-    li.textContent = `${state.allProductsArray[i].name} had ${state.allProductsArray[i].views} views and was clicked ${state.allProductsArray[i].clicks} times.`;
-    ul.appendChild(li);
+    let thisProducts = state.allProductsArray[i];
+    labelArray.push(thisProducts.name);
+    clicksArray.push(thisProducts.clicks);
+    viewsArray.push(thisProducts.views);
   }
+
+  const data = {
+    labels: labelArray,
+    datasets: [
+      {
+        label: "Views",
+        data: viewsArray,
+        backgroundColor: "white",
+      },
+      {
+        label: "Clicks",
+        data: clicksArray,
+
+        backgroundColor: "red",
+      },
+    ],
+  };
+
+  const config = {
+    type: "bar",
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+      indexAxis: "y",
+    },
+  };
+  const canvasChart = document.getElementById("myChart");
+  new Chart(canvasChart, config);
 }
 
 let bag = new Products("bag", "./images/bag.jpg");
