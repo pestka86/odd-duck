@@ -122,9 +122,47 @@ function renderChart() {
   };
   const canvasChart = document.getElementById("myChart");
   new Chart(canvasChart, config);
+  setLocalStorage();
 }
 
-let bag = new Products("bag", "./images/bag.jpg");
+function setLocalStorage() {
+  localStorage.setItem("productData", JSON.stringify(state.allProductsArray));
+}
+
+function checkLocalStorage() {
+  const localData = JSON.parse(localStorage.getItem("productData"));
+  if (localData) {
+    for (let i = 0; i < localData.length; i++) {
+      let name = localData[i].name;
+      let src = localData[i].src;
+      let views = localData[i].views;
+      let clicks = localData[i].clicks;
+      new Products(name, src, views, clicks);
+    }
+  } else {
+    let bag = new Products("bag", "./images/bag.jpg");
+    let banana = new Products("banana", "./images/banana.jpg");
+    let bathroom = new Products("bathroom", "./images/bathroom.jpg");
+    let boots = new Products("boots", "./images/boots.jpg");
+    let breakfast = new Products("breakfast", "./images/bathroom.jpg");
+    let bubblegum = new Products("bubblegum", "./images/bubblegum.jpg");
+    let chair = new Products("chair", "./images/chair.jpg");
+    let cthulhu = new Products("cthulhu", "./images/cthulhu.jpg");
+    let dogduck = new Products("dogduck", "./images/dog-duck.jpg");
+    let dragon = new Products("dragon", "./images/dragon.jpg");
+    let pen = new Products("pen", "./images/pen.jpg");
+    let petsweep = new Products("petsweep", "./images/pet-sweep.jpg");
+    let scissors = new Products("scissors", "./images/scissors.jpg");
+    let shark = new Products("shark", "./images/shark.jpg");
+    let sweep = new Products("sweep", "./images/sweep.jpg");
+    let tauntaun = new Products("tauntaun", "./images/tauntaun.jpg");
+    let unicorn = new Products("unicorn", "./images/unicorn.jpg");
+    let watercan = new Products("watercan", "./images/water-can.jpg");
+    let wineglass = new Products("wineglass", "./images/wine-glass.jpg");
+  }
+}
+
+/*let bag = new Products("bag", "./images/bag.jpg");
 let banana = new Products("banana", "./images/banana.jpg");
 let bathroom = new Products("bathroom", "./images/bathroom.jpg");
 let boots = new Products("boots", "./images/boots.jpg");
@@ -142,7 +180,9 @@ let sweep = new Products("sweep", "./images/sweep.jpg");
 let tauntaun = new Products("tauntaun", "./images/tauntaun.jpg");
 let unicorn = new Products("unicorn", "./images/unicorn.jpg");
 let watercan = new Products("watercan", "./images/water-can.jpg");
-let wineglass = new Products("wineglass", "./images/wine-glass.jpg");
+let wineglass = new Products("wineglass", "./images/wine-glass.jpg");*/
+
+checkLocalStorage();
 
 state.allProductsArray.push(
   bag,
